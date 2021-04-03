@@ -1,16 +1,16 @@
 #include <PositionPID.h>
 
-#define inputPin 0
-#define pwmPin 3
+#define inputPin 3
+#define pwmPin 11
 
-float pidDuration = 0.1;
+float pidDuration = 0.1;  //  [sec]
 double measuredValue = 0;
-const int outputMaxValue = 255;
-float kp = 1, ki = 6, kd = 0;
+const int outputMaxValue = 255;  //  max value for pid output
+float kp = 1, ki = 4, kd = 0;  //  pid gains (or weights)
 double setPoint = 0;
 unsigned long  lastTime;
 
-PositionPID pid(setPoint, measuredValue, kp, ki, kd);
+PositionPID pid(setPoint, outputMaxValue, kp, ki, kd);
 
 
 void setup()

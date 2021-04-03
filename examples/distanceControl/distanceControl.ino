@@ -4,37 +4,37 @@
 #define trigPin 3 //attach pin D3 Arduino to pin Trig of HC-SR04
 #define pwmLeftPin 11
 #define pwmRightPin 10
-#define dirLeftPin_1 7
-#define dirLeftPin_2 6
-#define dirRightPin_1 5
-#define dirRightPin_2 4
+#define dirLeftPin_A 7
+#define dirLeftPin_B 6
+#define dirRightPin_A 5
+#define dirRightPin_B 4
 
 long duration; // variable for the duration of sound wave travel
 float distance; // variable for the distance measurement
 
-float pidDuration = 0.1;
-const int outputMaxValue = 255;
-float kp = 1, ki = 6, kd = 0;
+float pidDuration = 0.1; //  [sec]
+const int outputMaxValue = 255;  //  max value for pid output
+float kp = 1, ki = 4, kd = 0;  //  pid gains (or weights)
 double setPoint = 0;
 unsigned long  lastTime;
 bool stopFlag = false;
 
-PositionPID pidLeft(setPoint, setPoint, kp, ki, kd);
-PositionPID pidRghit(setPoint, setPoint, kp, ki, kd);
+PositionPID pidLeft(setPoint, outputMaxValue, kp, ki, kd);
+PositionPID pidRghit(setPoint, outputMaxValue, kp, ki, kd);
 
 
 void motorLeft(int pwm)
 {
-  if(!pidLeft.dir)
+  if(pidLeft.dir == false)
   { 
-    digitalWrite(dirLeftPin_1, HIGH);
-    digitalWrite(dirLeftPin_2, LOW);
+    digitalWrite(dirLeftPin_A, HIGH);
+    digitalWrite(dirLeftPin_B, LOW);
     analogWrite(pwmLeftPin, pwm);
   }
   else
   {
-    digitalWrite(dirLeftPin_1, LOW);
-    digitalWrite(dirLeftPin_2, HIGH);
+    digitalWrite(dirLeftPin_A, LOW);
+    digitalWrite(dirLeftPin_B, HIGH);
     analogWrite(pwmLeftPin, pwm);
   }
 }
@@ -42,16 +42,16 @@ void motorLeft(int pwm)
 
 void motorRghit(int pwm)
 {
-  if(!pidRghit.dir)
+  if(pidRghit.dir == false)
   { 
-    digitalWrite(dirRightPin_1, LOW);
-    digitalWrite(dirRightPin_2, HIGH);
+    digitalWrite(dirRightPin_A, LOW);
+    digitalWrite(dirRightPin_B, HIGH);
     analogWrite(pwmRightPin, pwm);
   }
   else
   {
-    digitalWrite(dirRightPin_1, HIGH);
-    digitalWrite(dirRightPin_2, LOW);
+    digitalWrite(dirRightPin_A, HIGH);
+    digitalWrite(dirRightPin_B, LOW);
     analogWrite(pwmRightPin, pwm);
   }
 }
@@ -72,10 +72,10 @@ void setup()
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
   pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
   Serial.begin(9600); // // Serial Communication is starting with 9600 of baudrate speed
-  pinMode(dirLeftPin_1, OUTPUT);
-  pinMode(dirLeftPin_2, OUTPUT);
-  pinMode(dirRightPin_1, OUTPUT);
-  pinMode(dirRightPin_2, OUTPUT);
+  pinMode(dirLeftPin_A, OUTPUT);
+  pinMode(dirLeftPin_B, OUTPUT);
+  pinMode(dirRightPin_A, OUTPUT);
+  pinMode(dirRightPin_B, OUTPUT);
   lastTime = millis();
 }
 
@@ -99,7 +99,7 @@ void loop()
   double newSetPoint = 0.2;  //  [m]
   double dt = (double)(lastTime - millis());
   dt = dt / 1000;   //  [sec]
-  if (stopFlag)
+  if (stopFlag == true)
   {
     stopFlag = false;
     stop();

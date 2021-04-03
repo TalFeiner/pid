@@ -1,0 +1,9 @@
+PositionPID	KEYWORD1
+calcFunc	KEYWORD2
+setSetPoint	KEYWORD2
+setOutputMaxValue	KEYWORD2
+setGains	KEYWORD2
+reset	KEYWORD2
+output	KEYWORD2
+calc	KEYWORD2
+pidDir	KEYWORD2
