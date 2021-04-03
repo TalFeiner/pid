@@ -85,7 +85,8 @@ void loop()
   {
     setPoint = newSetPoint;
     outputMaxValue = newoutputMaxValue;
-    pid.setSetPoint(setPoint).setOutputMaxValue(outputMaxValue);
+    pid.setSetPoint(setPoint);
+    pid.setOutputMaxValue(outputMaxValue);
   }
   if (newkp != kp || newki !=ki || newkd != kd)
   {
