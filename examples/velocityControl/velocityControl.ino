@@ -97,7 +97,7 @@ void loop()
     long newPosition = enc.read();
     angularVel = calcWheelVel(newPosition, oldPosition, dt);  //  [rad/sec]
     oldPosition = newPosition;
-    Serial.println((String)(angularVel,8) + " [m]");
+    Serial.println((String)(angularVel,8) + " [rad/sec]");
     double output = pid.calc(angularVel, dt);
     drive();
   }
