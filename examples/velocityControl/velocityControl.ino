@@ -35,7 +35,7 @@ void drive(byte pwm = 1)
 {
   if (pwm != 0)
   {
-    byte pwm = pid.output();
+    pwm = pid.output();
   }
   if(pid.dir == false)
   { 
