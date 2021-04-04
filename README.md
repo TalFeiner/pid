@@ -1,8 +1,11 @@
+
+
+*The examples are compatible only for arduino, but the library itself uses just C++ language. So I Think it's supposed to be compatible with lots of different hardware and compilers. I tested it only on arduino mega 2560, up to now. [Reference](https://controlguru.com/integral-reset-windup-jacketing-logic-and-the-velocity-pi-form/)*
+
+
+
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
-
-[Reference](https://controlguru.com/integral-reset-windup-jacketing-logic-and-the-velocity-pi-form/)
-
-The examples are compatible only for arduino, but the library itself uses just C++ language. So I Think it's supposed to be compatible with lots of different hardware and IDE's. I checked it only on arduino mega 2560 for now.
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
 
