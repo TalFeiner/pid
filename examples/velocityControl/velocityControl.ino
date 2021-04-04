@@ -14,7 +14,7 @@ double angularVel = 0;
 const float D = 0.1651;  //  wheel diameter [m]
 const int pulsesPerRev = 60;  //  number of encoder pulses per revolve
 float pidDuration = 0.1;  //  [sec]
-byte outputMaxValue = 4000;  //  max value for pid output
+int outputMaxValue = 4000;  //  max value for pid output
 float kp = 1, ki = 6, kd = 0;  //  pid gains (or weights)
 double setPoint = 0;
 unsigned long  lastTime;
